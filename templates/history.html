@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For chart trends -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Style */
+        .navbar {
+            background-color: #333;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 30px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Button */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #4CAF50;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>History of Reports</h1>
+    </div>
+
+    <div class="content">
+        <h2>View Past Reports</h2>
+
+        <!-- Report History Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Report ID</th>
+                    <th>Title</th>
+                    <th>Date Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Rows with Date and Time -->
+                <tr>
+                    <td>#001</td>
+                    <td>Internship Report 1</td>
+                    <td>2025-01-10 14:30</td>
+                </tr>
+                <tr>
+                    <td>#002</td>
+                    <td>Internship Report 2</td>
+                    <td>2025-01-12 09:45</td>
+                </tr>
+                <tr>
+                    <td>#003</td>
+                    <td>Internship Report 3</td>
+                    <td>2025-01-14 16:00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Trends Chart -->
+        <div class="chart-container">
+            <canvas id="reportTrends"></canvas>
+        </div>
+
+        <a href="/">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Example chart data (can be dynamically generated from backend)
+        var ctx = document.getElementById('reportTrends').getContext('2d');
+        var reportTrends = new Chart(ctx, {
+            type: 'line', // Change to 'bar' for bar chart
+            data: {
+                labels: ['Jan 1', 'Jan 5', 'Jan 10', 'Jan 12', 'Jan 15'],
+                datasets: [{
+                    label: 'Number of Reports',
+                    data: [3, 2, 5, 6, 4], // Example data
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Reports: ' + context.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
