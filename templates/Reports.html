@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="style/css" href="{{ url_for('static', filename='style/Reports.css') }}">
 </head>
 <body>
     <div class="navbar">
@@ -86,6 +85,96 @@
 
         <a href="/">Back to Dashboard</a>
     </div>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Style */
+.navbar {
+    background-color: #333;
+    padding: 15px;
+    color: white;
+    text-align: center;
+}
+
+/* Content Section */
+.content {
+    padding: 30px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #4CAF50;
+    color: white;
+    display: inline-block;
+    width: 45%;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: #388E3C;
+}
+
+.card h3 {
+    margin-top: 10px;
+    color: white;
+}
+
+.card p {
+    color: #f0f0f0;
+}
+
+.card i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.details-container {
+    display: none;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button */
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #4CAF50;
+}
+    </style>
 
     <script src="{{ url_for('static', filename='scripts/Reports.js') }}"></script>
 </body>
