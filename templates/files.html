@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,6 +171,19 @@
         });
     </script>
 </head>
+<!--------------------------------------------------------------------------------------------------------------->
+<!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+
 <body>
     <div class="navbar">
         <h1>Manage Files</h1>
@@ -177,7 +191,7 @@
     
     <div class="content">
         <h2>Upload Files</h2>
-        
+
         <!-- Student Files Upload -->
         <div class="upload-form">
             <h3>Upload Student Files</h3>
@@ -187,18 +201,8 @@
                 <button type="submit">Upload Student File</button>
             </form>
         </div>
-        
-        <!-- Weekly Files Upload -->
-        <div class="upload-form">
-            <h3>Upload Weekly Files</h3>
-            <form action="/upload_Weekly_file" method="POST" enctype="multipart/form-data">
-                <label for="weekly_file">Choose Weekly Files:</label>
-                <input type="file" name="weekly_file" id="weekly_file" required>
-                <button type="submit">Upload Weekly File</button>
-            </form>
-        </div>
 
-        <!-- Monthly Files Upload -->
+        <!-- Report Files Upload -->
         <div class="upload-form">
             <h3>Upload Monthly Files</h3>
             <form action="/upload_Monthly_file" method="POST" enctype="multipart/form-data">
@@ -210,7 +214,28 @@
         
         <a href="/">Back to Dashboard</a>
     </div>
-    
+    <!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- 
+
+     CCCCCCCC     CCCCCCCC     CCCCCCCC
+    CC          CC           CC
+   CC            CC           CC
+  CC              CCCCCCCC     CCCCCCCC
+   CC                    CC           CC
+    CC                  CC           CC
+     CCCCCCCC    CCCCCCCC     CCCCCCCC  
+-->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -219,6 +244,7 @@
             padding: 0;
         }
 
+        /* Navbar Style */
         .navbar {
             background-color: #333;
             padding: 15px;
@@ -226,6 +252,7 @@
             text-align: center;
         }
 
+        /* Content Section */
         .content {
             padding: 30px;
             background-color: white;
@@ -234,7 +261,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2 {
+        /* Title */
+        h1,
+        h2 {
             color: #333;
             font-size: 28px;
         }
@@ -244,6 +273,7 @@
             margin-bottom: 20px;
         }
 
+        /* Upload Form */
         .upload-form {
             background-color: #f9f9f9;
             border-radius: 8px;
@@ -287,11 +317,7 @@
             background-color: #45a049;
         }
 
-        .upload-form button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
+        /* Back Link */
         a {
             display: inline-block;
             margin-top: 20px;
@@ -308,5 +334,41 @@
             background-color: #4CAF50;
         }
     </style>
+    <!-- 
+
+     CCCCCCCC     CCCCCCCC     CCCCCCCC
+    CC          CC           CC
+   CC            CC           CC
+  CC              CCCCCCCC     CCCCCCCC
+   CC                    CC           CC
+    CC                  CC           CC
+     CCCCCCCC    CCCCCCCC     CCCCCCCC  
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- 
+
+    JJJJJJJJJJJJ   JJJJJJJJJJ   
+          JJ      JJ
+          JJ       JJ
+          JJ        JJJJJJJJJ
+    J     JJ                JJ
+     JJ  JJ                JJ
+      JJJJ         JJJJJJJJJ 
+-->
+    <script>
+
+    </script>
+    <!-- 
+
+    JJJJJJJJJJJJ   JJJJJJJJJJ   
+          JJ      JJ
+          JJ       JJ
+          JJ        JJJJJJJJJ
+    J     JJ                JJ
+     JJ  JJ                JJ
+      JJJJ         JJJJJJJJJ 
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
 </body>
+
 </html>

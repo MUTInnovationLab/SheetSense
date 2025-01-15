@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
+<!--
+
+    Reports Page
+
+    This page displays all the reports submitted by students.
+    It has two sections: Submitted and Not Submitted.
+    The Submitted section displays all the students who have submitted their reports.
+    The Not Submitted section displays all the students who have not submitted their reports.
+
+    Each section has a card that displays the number of students and a table that shows the details of each student.
+
+    The details table has the following columns:
+    - Student Number
+    - Student Name
+    - Report Title
+    - Date Submitted (for Submitted section)
+    - Status (for Not Submitted section)
+
+    The page also has a button that redirects the user back to the dashboard.
+
+-->
+<!--------------------------------------------------------------------------------------------------------------->
+<!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+
 <body>
     <div class="navbar">
         <h1>Reports Page</h1>
@@ -86,96 +122,167 @@
         <a href="/">Back to Dashboard</a>
     </div>
 
+    <!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- 
+
+     CCCCCCCC     CCCCCCCC     CCCCCCCC
+    CC          CC           CC
+   CC            CC           CC
+  CC              CCCCCCCC     CCCCCCCC
+   CC                    CC           CC
+    CC                  CC           CC
+     CCCCCCCC    CCCCCCCC     CCCCCCCC  
+-->
+
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Navbar Style */
-.navbar {
-    background-color: #333;
-    padding: 15px;
-    color: white;
-    text-align: center;
-}
+        /* Navbar Style */
+        .navbar {
+            background-color: #333;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
 
-/* Content Section */
-.content {
-    padding: 30px;
-    background-color: white;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        /* Content Section */
+        .content {
+            padding: 30px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-/* Title */
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
+        /* Title */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-/* Card Styling */
-.card {
-    background-color: #4CAF50;
-    color: white;
-    display: inline-block;
-    width: 45%;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
+        /* Card Styling */
+        .card {
+            background-color: #4CAF50;
+            color: white;
+            display: inline-block;
+            width: 45%;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
 
-.card:hover {
-    background-color: #388E3C;
-}
+        .card:hover {
+            background-color: #388E3C;
+        }
 
-.card h3 {
-    margin-top: 10px;
-    color: white;
-}
+        .card h3 {
+            margin-top: 10px;
+            color: white;
+        }
 
-.card p {
-    color: #f0f0f0;
-}
+        .card p {
+            color: #f0f0f0;
+        }
 
-.card i {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
+        .card i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
 
-.details-container {
-    display: none;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .details-container {
+            display: none;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-/* Button */
-a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
+        /* Button */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
 
-a:hover {
-    background-color: #4CAF50;
-}
+        a:hover {
+            background-color: #4CAF50;
+        }
     </style>
 
-    <script src="{{ url_for('static', filename='scripts/Reports.js') }}"></script>
+    <!-- 
+
+     CCCCCCCC     CCCCCCCC     CCCCCCCC
+    CC          CC           CC
+   CC            CC           CC
+  CC              CCCCCCCC     CCCCCCCC
+   CC                    CC           CC
+    CC                  CC           CC
+     CCCCCCCC    CCCCCCCC     CCCCCCCC  
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- 
+
+    JJJJJJJJJJJJ   JJJJJJJJJJ   
+          JJ      JJ
+          JJ       JJ
+          JJ        JJJJJJJJJ
+    J     JJ                JJ
+     JJ  JJ                JJ
+      JJJJ         JJJJJJJJJ 
+-->
+
+
+
+
+    <script>
+        function toggleDetails(section) {
+            // Hide both details sections first
+            document.getElementById('submitted').style.display = 'none';
+            document.getElementById('not-submitted').style.display = 'none';
+
+            // Show the clicked section
+            document.getElementById(section).style.display = 'block';
+        }
+    </script>
+
+    <!-- 
+
+    JJJJJJJJJJJJ   JJJJJJJJJJ   
+          JJ      JJ
+          JJ       JJ
+          JJ        JJJJJJJJJ
+    J     JJ                JJ
+     JJ  JJ                JJ
+      JJJJ         JJJJJJJJJ 
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+
 </body>
+
 </html>
