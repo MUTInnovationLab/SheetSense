@@ -1,6 +1,7 @@
+// Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,6 +17,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const db = getFirestore(app);
+
+// Function to format date for document ID (date only)
+function formatDateForId() {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+}
 
 // Function to handle file upload to Firebase Storage
 async function uploadFileToStorage(file, collectionName) {
@@ -41,18 +48,34 @@ async function uploadFileToStorage(file, collectionName) {
     }
 }
 
-// Function to save file metadata to Firestore
+// Function to save or update file metadata to Firestore with date-based document ID
 async function saveFileMetadata(fileData, collectionName) {
     try {
-        const docRef = await addDoc(collection(db, collectionName), {
-            fileName: fileData.fileName,
-            uploadPath: fileData.uploadPath,
-            downloadURL: fileData.downloadURL,
-            uploadedAt: new Date(fileData.timestamp),
-            fileType: fileData.fileType,
-            fileSize: fileData.fileSize
-        });
-        return docRef.id;
+        const docId = formatDateForId();
+        const docRef = doc(db, collectionName, docId);
+        
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            const existingData = docSnap.data();
+            const files = existingData.files || [];
+            files.push({
+                fileName: fileData.fileName,
+                uploadPath: fileData.uploadPath,
+                downloadURL: fileData.downloadURL,
+                uploadedAt: new Date(fileData.timestamp),
+                fileType: fileData.fileType,
+                fileSize: fileData.fileSize
+            });
+            
+            await setDoc(docRef, { files: files }, { merge: true });
+        } else {
+            await setDoc(docRef, {
+                files: [fileData]
+            });
+        }
+        
+        return docId;
     } catch (error) {
         console.error("Error saving metadata:", error);
         throw error;
@@ -71,7 +94,6 @@ async function handleFileUpload(event, inputId, collectionName, buttonText) {
         return;
     }
     
-    // Check if file is an Excel file
     const validTypes = [
         'application/vnd.ms-excel',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -104,7 +126,8 @@ async function handleFileUpload(event, inputId, collectionName, buttonText) {
 // Add event listeners when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const studentFileForm = document.querySelector('form[action="/upload_student_file"]');
-    const reportFileForm = document.querySelector('form[action="/upload_report_file"]');
+    const weeklyFileForm = document.querySelector('form[action="/upload_Weekly_file"]');
+    const monthlyFileForm = document.querySelector('form[action="/upload_Monthly_file"]');
     
     if (studentFileForm) {
         studentFileForm.addEventListener('submit', (e) => 
@@ -112,9 +135,15 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
     
-    if (reportFileForm) {
-        reportFileForm.addEventListener('submit', (e) => 
-            handleFileUpload(e, 'report_file', 'reports', 'Upload Report File')
+    if (weeklyFileForm) {
+        weeklyFileForm.addEventListener('submit', (e) => 
+            handleFileUpload(e, 'weekly_file', 'weekly', 'Upload Report File')
         );
     }
-})
+
+    if (monthlyFileForm) {
+        monthlyFileForm.addEventListener('submit', (e) => 
+            handleFileUpload(e, 'monthly_file', 'monthly', 'Upload Report File')
+        );
+    }
+});
