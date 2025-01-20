@@ -1,11 +1,11 @@
 from flask import Flask, render_template, send_from_directory, url_for
 import os
+os.environ['GOOGLE_CLOUD_PROJECT'] = 'sheetsensedb'
 import firebase_admin 
 from firebase_admin import credentials, firestore 
 import pandas as pd
 import json
 from google.cloud.firestore_v1._helpers import DatetimeWithNanoseconds
-
 
 class CustomJSONEncoder(json.JSONEncoder): 
     def default(self, obj): 
@@ -21,7 +21,6 @@ print("GOOGLE_CLOUD_PROJECT:", os.getenv('GOOGLE_CLOUD_PROJECT'))
 # Initialize Firebase using environment variables
 cred = credentials.ApplicationDefault()
 firebase_admin.initialize_app(cred, {
-    
     'projectId': os.getenv('GOOGLE_CLOUD_PROJECT')
 })
 db = firestore.client()
