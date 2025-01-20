@@ -78,19 +78,14 @@ HH    HH       HH        HH        HH    HHHHHHHH
                 </thead>
                 <tbody>
                     <!-- Example Row: Submitted -->
+                    {% for student in submitted %}
                     <tr>
-                        <td>123456</td>
-                        <td>John Doe</td>
-                        <td>Internship Report 1</td>
-                        <td>2025-01-10 14:30</td>
+                        <td>{{ student.student_number }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.report_title }}</td>
+                        <td>{{ student.date_submitted }}</td>
                     </tr>
-                    <!-- Example Row: Submitted -->
-                    <tr>
-                        <td>112233</td>
-                        <td>Michael Johnson</td>
-                        <td>Internship Report 3</td>
-                        <td>2025-01-12 09:45</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -109,12 +104,14 @@ HH    HH       HH        HH        HH    HHHHHHHH
                 </thead>
                 <tbody>
                     <!-- Example Row: Not Submitted -->
+                    {% for student in not_submitted %}
                     <tr>
-                        <td>654321</td>
-                        <td>Jane Smith</td>
-                        <td>Internship Report 2</td>
-                        <td>Not Submitted</td>
+                        <td>{{ student.student_number }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.report_title }}</td>
+                        <td>{{ student.status }}</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
