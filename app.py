@@ -6,7 +6,6 @@ import pandas as pd
 import json
 from google.cloud.firestore_v1._helpers import DatetimeWithNanoseconds
 
-print("GOOGLE_CLOUD_PROJECT:", os.getenv('GOOGLE_CLOUD_PROJECT'))
 
 class CustomJSONEncoder(json.JSONEncoder): 
     def default(self, obj): 
@@ -16,9 +15,13 @@ class CustomJSONEncoder(json.JSONEncoder):
 
 app = Flask(__name__)
 
+# Print the GOOGLE_CLOUD_PROJECT environment variable for debugging
+print("GOOGLE_CLOUD_PROJECT:", os.getenv('GOOGLE_CLOUD_PROJECT'))
+
 # Initialize Firebase using environment variables
 cred = credentials.ApplicationDefault()
 firebase_admin.initialize_app(cred, {
+    
     'projectId': os.getenv('GOOGLE_CLOUD_PROJECT')
 })
 db = firestore.client()
