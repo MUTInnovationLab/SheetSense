@@ -1,11 +1,12 @@
 from flask import Flask, render_template, send_from_directory, url_for
-# make_response
 import os
 import firebase_admin 
 from firebase_admin import credentials, firestore 
 import pandas as pd
 import json
 from google.cloud.firestore_v1._helpers import DatetimeWithNanoseconds
+
+print("GOOGLE_CLOUD_PROJECT:", os.getenv('GOOGLE_CLOUD_PROJECT'))
 
 class CustomJSONEncoder(json.JSONEncoder): 
     def default(self, obj): 
@@ -15,9 +16,11 @@ class CustomJSONEncoder(json.JSONEncoder):
 
 app = Flask(__name__)
 
-# Initialize Firebase 
-cred = credentials.Certificate("serviceAccountKey.json") 
-firebase_admin.initialize_app(cred) 
+# Initialize Firebase using environment variables
+cred = credentials.ApplicationDefault()
+firebase_admin.initialize_app(cred, {
+    'projectId': os.getenv('GOOGLE_CLOUD_PROJECT')
+})
 db = firestore.client()
 
 def fetch_students(): 
@@ -49,8 +52,6 @@ def fetch_weekly_reports():
     
     return set(submitted_students)
 
-
-
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -75,19 +76,14 @@ def view_history():
 def manage_files():
     return render_template('files.html')
 
-# @app.route('/static/<path:filename>') 
-# def custom_static(filename):
-#     response = make_response(send_from_directory(os.path.join(app.root_path, 'static'), filename)) 
-#     response.headers['Cache-Control'] = 'public, max-age=31536000, immutable' 
-#     return response
-
 @app.route('/static/<path:filename>') 
 def custom_static(filename): 
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
 
 @app.route('/favicon.ico') 
-def favicon(): return send_from_directory(os.path.join(app.root_path, 'static'), 
-                                          'favicon.ico', mimetype='image/vnd.microsoft.icon')
+def favicon(): 
+    return send_from_directory(os.path.join(app.root_path, 'static'), 
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == "__main__":
     app.run(debug=True)
