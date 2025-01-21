@@ -50,6 +50,14 @@ HH    HH       HH        HH        HH    HHHHHHHH
     <div class="content">
         <h2>View All Reports</h2>
 
+        <!-- Debugging: Display submitted students --> 
+         <h3>Submitted Students (Debugging Info)</h3> 
+         <pre>{{ submitted }}</pre>
+
+        <!-- Debugging: Display not submitted students --> 
+        <h3>Not Submitted Students (Debugging Info)</h3> 
+        <pre>{{ not_submitted }}</pre>
+
         <!-- Submitted Reports Card -->
         <div class="card" onclick="toggleDetails('submitted')">
             <i class="fas fa-check-circle"></i>
