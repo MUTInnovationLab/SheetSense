@@ -77,7 +77,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/view_reports') 
-def reports(): 
+def view_reports(): 
     submitted, not_submitted = process_data() 
     return render_template('Reports.html', submitted=submitted, not_submitted=not_submitted)
 
