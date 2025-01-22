@@ -6,7 +6,7 @@ from firebase_admin import credentials, firestore, storage, initialize_app
 # Initialize Flask app
 app = Flask(__name__)
 
-# Initialize Firebase 
+# Initialize Firebase.
 cred = credentials.Certificate("config/serviceAccountKey.json") 
 initialize_app(cred) 
 db = firestore.client()
