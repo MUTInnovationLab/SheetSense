@@ -10,7 +10,8 @@ app = Flask(__name__)
 cred = credentials.Certificate("config/serviceAccountKey.json") 
 initialize_app(cred) 
 db = firestore.client()
-
+ 
+ 
 # Fetch data from Firestore 
 def fetch_data(collection):
     try:
