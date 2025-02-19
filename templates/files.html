@@ -1,85 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Files</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<!--------------------------------------------------------------------------------------------------------------->
-<!-- 
-
-HH    HH    HHHHHHHHH    HH        HH    HH
-HH    HH       HH        HHHH     HHH    HH
-HH    HH       HH        HH HH  HH HH    HH
-HHHHHHHH       HH        HH   HH   HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HHHHHHHH
-
--->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Files Management</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    </head>
 <body>
     <div class="navbar">
-        <h1>Manage Files</h1>
+        <h1>Student Files Management</h1>
     </div>
     
     <div class="content">
-        <h2>Upload Files</h2>
-        
-        <!-- Student Files Upload -->
-        <div class="upload-form">
-            <h3>Upload Student Files</h3>
-            <form action="/upload_student_file" method="POST" enctype="multipart/form-data">
-                <label for="student_file">Choose Students files:</label>
-                <input type="file" name="student_file" id="student_file" required>
-                <button type="submit">Upload Student File</button>
-            </form>
-        </div>
-        
-        <!-- Weekly Files Upload -->
-        <div class="upload-form">
-            <h3>Upload Weekly Files</h3>
-            <form action="/upload_Weekly_file" method="POST" enctype="multipart/form-data">
-                <label for="weekly_file">Choose Weekly Files:</label>
-                <input type="file" name="weekly_file" id="weekly_file" required>
-                <button type="submit">Upload Weekly File</button>
-            </form>
-        </div>
+        <div class="upload-section">
+            <!-- Student List Upload -->
+            <form id="studentFileForm" class="upload-form">
+                <h3>Student List Upload</h3>
 
-        <!-- Monthly Files Upload -->
-        <div class="upload-form">
-            <h3>Upload Monthly Files</h3>
-            <form action="/upload_Monthly_file" method="POST" enctype="multipart/form-data">
-                <label for="monthly_file">Choose Monthly Files:</label>
-                <input type="file" name="monthly_file" id="monthly_file" required>
-                <button type="submit">Upload Monthly File</button>
+                <div class="file-input-container">
+                    <label for="student_file">Choose Student List File (Excel):</label>
+                    <input type="file" name="student_file" id="student_file" accept=".xlsx,.xls" required>
+                    <div class="file-preview" id="student_file_preview"></div>
+                </div>
+                <button type="submit">Upload Student List</button>
+            </form>
+
+            <!-- Weekly Report Upload -->
+            <form id="weeklyFileForm" class="upload-form">
+                <h3>Weekly Report Upload</h3>
+                <p class="file-requirements">Required fields: ID, Name, Lastname, Email, PDF File</p>
+                <div class="file-input-container">
+                    <label for="weekly_file">Choose Weekly Report (Excel):</label>
+                    <input type="file" name="weekly_file" id="weekly_file" accept=".xlsx,.xls" required>
+                    <div class="file-preview" id="weekly_file_preview"></div>
+                </div>
+                <button type="submit">Upload Weekly Report</button>
+            </form>
+
+            <!-- Monthly Report Upload -->
+            <form id="monthlyFileForm" class="upload-form">
+                <h3>Monthly Report Upload</h3>
+                <p class="file-requirements">Required fields: ID, Name, Lastname, Email, PDF File</p>
+                <div class="file-input-container">
+                    <label for="monthly_file">Choose Monthly Report (Excel):</label>
+                    <input type="file" name="monthly_file" id="monthly_file" accept=".xlsx,.xls" required>
+                    <div class="file-preview" id="monthly_file_preview"></div>
+                </div>
+                <button type="submit">Upload Monthly Report</button>
             </form>
         </div>
-        
-        <a href="/">Back to Dashboard</a>
     </div>
-    <!-- 
 
-HH    HH    HHHHHHHHH    HH        HH    HH
-HH    HH       HH        HHHH     HHH    HH
-HH    HH       HH        HH HH  HH HH    HH
-HHHHHHHH       HH        HH   HH   HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HHHHHHHH
-
--->
-    <!--------------------------------------------------------------------------------------------------------------->
-        <!-- 
-
-     CCCCCCCC     CCCCCCCC     CCCCCCCC
-    CC          CC           CC
-   CC            CC           CC
-  CC              CCCCCCCC     CCCCCCCC
-   CC                    CC           CC
-    CC                  CC           CC
-     CCCCCCCC    CCCCCCCC     CCCCCCCC  
--->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,9 +70,10 @@ HH    HH       HH        HH        HH    HHHHHHHH
         .content {
             padding: 30px;
             background-color: white;
-            margin: 20px;
+            margin: 20px auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
         }
 
         h1, h2 {
@@ -132,12 +105,51 @@ HH    HH       HH        HH        HH    HHHHHHHH
             color: #666;
         }
 
-        .upload-form input[type="file"] {
-            width: 100%;
-            padding: 10px;
+        .file-input-container {
+            position: relative;
             margin-bottom: 15px;
-            border-radius: 5px;
+            width: 100%;
+        }
+
+        .file-preview {
+            margin-top: 10px;
+            padding: 10px;
             border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .file-preview.active {
+            display: block;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-right: 30px;
+        }
+
+        .file-icon {
+            font-size: 24px;
+            color: #666;
+        }
+
+        .clear-mark {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-weight: bold;
+            color: #ff4444;
+            font-size: 16px;
+        }
+
+        .clear-mark:hover {
+            color: #cc0000;
         }
 
         .upload-form button {
@@ -176,201 +188,342 @@ HH    HH       HH        HH        HH    HHHHHHHH
         a:hover {
             background-color: #4CAF50;
         }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
     </style>
-    <!-- 
-
-     CCCCCCCC     CCCCCCCC     CCCCCCCC
-    CC          CC           CC
-   CC            CC           CC
-  CC              CCCCCCCC     CCCCCCCC
-   CC                    CC           CC
-    CC                  CC           CC
-     CCCCCCCC    CCCCCCCC     CCCCCCCC  
--->
-    <!--------------------------------------------------------------------------------------------------------------->
-    <!-- 
-
-    JJJJJJJJJJJJ   JJJJJJJJJJ   
-          JJ      JJ
-          JJ       JJ
-          JJ        JJJJJJJJJ
-    J     JJ                JJ
-     JJ  JJ                JJ
-      JJJJ         JJJJJJJJJ 
--->
-<!-- Firebase SDK -->
 <script type="module">
-    // Import Firebase functions
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-    import { getFirestore, collection, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBvLwOd23fTx6RpAuodsyFZwntry6AV9Ik",
-        authDomain: "cvsystem-253f9.firebaseapp.com",
-        projectId: "cvsystem-253f9",
-        storageBucket: "cvsystem-253f9.appspot.com",
-        messagingSenderId: "133527156661",
-        appId: "1:133527156661:web:8d8794eeae33b16dabcbfc"
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBvLwOd23fTx6RpAuodsyFZwntry6AV9Ik",
+    authDomain: "cvsystem-253f9.firebaseapp.com",
+    projectId: "cvsystem-253f9",
+    storageBucket: "cvsystem-253f9.appspot.com",
+    messagingSenderId: "133527156661",
+    appId: "1:133527156661:web:8d8794eeae33b16dabcbfc"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// Process student data into the required format
+function processStudentData(data) {
+    return data.filter(row => {
+        return row['Student number'] && 
+               row['Full name/s'] && 
+               row['Surname'] && 
+               row['email address'];
+    }).map(row => ({
+        studentNumber: String(row['Student number'] || '').trim(),
+        fullNames: String(row['Full name/s'] || '').trim(),
+        surname: String(row['Surname'] || '').trim(),
+        emailAddress: String(row['email address'] || '').toLowerCase().trim(),
+        companyName: String(row['Company name'] || '').trim(),
+        cellNumber: String(row['cellphone number'] || '').trim()
+    }));
+}
+
+// Updated process report data with unified column mapping
+function processReportData(data, reportType) {
+    const columnMapping = {
+        weekly: {
+            timestamp: 'Timestamp',
+            name: 'Name',
+            lastname: 'Lastname',
+            email: 'Email',
+            companyName: 'Company name',
+            fileUrl: 'Upload Weekly Report'
+        },
+        monthly: {
+            timestamp: 'Timestamp',
+            name: 'Name',
+            lastname: 'Lastname',
+            email: 'Email',
+            companyName: 'Company Name',
+            fileUrl: 'Upload Monthly Report'
+        }
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const storage = getStorage(app);
-    const db = getFirestore(app);
+    const columns = columnMapping[reportType];
 
-    // Function to format date for document ID (date only)
-    function formatDateForId() {
-        const now = new Date();
-        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    return data.filter(row => {
+        return row[columns.timestamp] && 
+               row[columns.name] && 
+               row[columns.lastname] && 
+               row[columns.email] &&
+               row[columns.companyName] &&
+               row[columns.fileUrl];
+    }).map(row => ({
+        timestamp: String(row[columns.timestamp] || '').trim(),
+        name: String(row[columns.name] || '').trim(),
+        lastname: String(row[columns.lastname] || '').trim(),
+        email: String(row[columns.email] || '').toLowerCase().trim(),
+        companyName: String(row[columns.companyName] || '').trim(),
+        fileUrl: String(row[columns.fileUrl] || '').trim()
+    }));
+}
+
+// Upload student file to Storage and get download URL
+async function uploadFileToStorage(file, date) {
+    const fileExtension = file.name.split('.').pop();
+    const fileName = `student-lists/${date}_student_list.${fileExtension}`;
+    const storageRef = ref(storage, fileName);
+    
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    return downloadURL;
+}
+
+// Upload report file to Storage and get download URL
+async function uploadReportToStorage(file, type, date) {
+    const fileExtension = file.name.split('.').pop();
+    const fileName = `${type}-reports/${date}_${type}_report.${fileExtension}`;
+    const storageRef = ref(storage, fileName);
+    
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    return downloadURL;
+}
+
+// Handle student file upload
+async function handleFileUpload(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const fileInput = form.querySelector('input[type="file"]');
+    const submitButton = form.querySelector('button');
+    
+    if (!fileInput.files[0]) {
+        alert('Please select a file first');
+        return;
     }
 
-    // Function to handle file upload to Firebase Storage
-    async function uploadFileToStorage(file, collectionName) {
-        try {
-            const timestamp = Date.now();
-            const fileName = `${collectionName}/${timestamp}_${file.name}`;
-            const storageRef = ref(storage, fileName);
-            
-            const snapshot = await uploadBytes(storageRef, file);
-            const downloadURL = await getDownloadURL(snapshot.ref);
-            
-            return {
-                fileName: file.name,
-                uploadPath: fileName,
-                downloadURL: downloadURL,
-                timestamp: timestamp,
-                fileType: file.type,
-                fileSize: file.size
-            };
-        } catch (error) {
-            console.error("Error uploading file:", error);
-            throw error;
-        }
-    }
+    submitButton.disabled = true;
+    submitButton.textContent = 'Uploading...';
 
-    // Function to save or update file metadata to Firestore with date-based document ID
-    async function saveFileMetadata(fileData, collectionName) {
-        try {
-            const docId = formatDateForId();
-            const docRef = doc(db, collectionName, docId);
-            
-            // Check if document already exists
-            const docSnap = await getDoc(docRef);
-            
-            if (docSnap.exists()) {
-                // If document exists, append to files array
-                const existingData = docSnap.data();
-                const files = existingData.files || [];
-                files.push({
-                    fileName: fileData.fileName,
-                    uploadPath: fileData.uploadPath,
-                    downloadURL: fileData.downloadURL,
-                    uploadedAt: new Date(fileData.timestamp),
-                    fileType: fileData.fileType,
-                    fileSize: fileData.fileSize
-                });
-                
-                await setDoc(docRef, { files: files }, { merge: true });
-            } else {
-                // If document doesn't exist, create new one with files array
-                await setDoc(docRef, {
-                    files: [{
-                        fileName: fileData.fileName,
-                        uploadPath: fileData.uploadPath,
-                        downloadURL: fileData.downloadURL,
-                        uploadedAt: new Date(fileData.timestamp),
-                        fileType: fileData.fileType,
-                        fileSize: fileData.fileSize
-                    }]
-                });
-            }
-            
-            return docId;
-        } catch (error) {
-            console.error("Error saving metadata:", error);
-            throw error;
-        }
-    }
-
-    // Generic function to handle file uploads
-    async function handleFileUpload(event, inputId, collectionName, buttonText) {
-        event.preventDefault();
-        
-        const fileInput = document.getElementById(inputId);
+    try {
         const file = fileInput.files[0];
-        
-        if (!file) {
-            alert('Please select a file first');
-            return;
-        }
-        
-        // Check if file is an Excel file
-        const validTypes = [
-            'application/vnd.ms-excel',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ];
-        
-        if (!validTypes.includes(file.type)) {
-            alert('Please upload only Excel files (.xls or .xlsx)');
-            return;
-        }
-        
-        try {
-            const submitButton = event.target.querySelector('button');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Uploading...';
-            
-            const fileData = await uploadFileToStorage(file, collectionName);
-            await saveFileMetadata(fileData, collectionName);
-            
-            event.target.reset();
-            alert(`${collectionName} file uploaded successfully!`);
-        } catch (error) {
-            alert('Error uploading file: ' + error.message);
-        } finally {
-            const submitButton = event.target.querySelector('button');
+        const currentDate = new Date().toISOString().split('T')[0];
+        const fileURL = await uploadFileToStorage(file, currentDate);
+
+        const reader = new FileReader();
+
+        reader.onload = async (e) => {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                const students = processStudentData(jsonData);
+
+                if (students.length === 0) {
+                    throw new Error('No valid data found in the file');
+                }
+
+                const documentData = {
+                    students: students,
+                    uploadedAt: new Date().toISOString(),
+                    uploadTimestamp: new Date(),
+                    totalStudents: students.length,
+                    fileURL: fileURL,
+                    fileName: file.name
+                };
+
+                await setDoc(doc(db, 'students', currentDate), documentData);
+                
+                alert(`Successfully uploaded ${students.length} students and saved the file`);
+                form.reset();
+                
+                if (typeof clearFilePreview === 'function') {
+                    clearFilePreview(fileInput.id);
+                }
+
+            } catch (error) {
+                alert(`Error processing file: ${error.message}`);
+                console.error('Error:', error);
+            }
+
             submitButton.disabled = false;
-            submitButton.textContent = buttonText;
-        }
+            submitButton.textContent = 'Upload Student File';
+        };
+
+        reader.onerror = (error) => {
+            alert('Error reading file');
+            console.error('FileReader error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = 'Upload Student File';
+        };
+
+        reader.readAsArrayBuffer(file);
+
+    } catch (error) {
+        alert(`Error uploading file: ${error.message}`);
+        console.error('Upload error:', error);
+        submitButton.disabled = false;
+        submitButton.textContent = 'Upload Student File';
+    }
+}
+
+// Updated Report Upload handler
+async function handleReportUpload(event, reportType) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const fileInput = form.querySelector('input[type="file"]');
+    const submitButton = form.querySelector('button');
+    
+    if (!fileInput.files[0]) {
+        alert('Please select a file first');
+        return;
     }
 
-    // Add event listeners when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        const studentFileForm = document.querySelector('form[action="/upload_student_file"]');
-        const weeklyFileForm = document.querySelector('form[action="/upload_Weekly_file"]');
-        const monthlyFileForm = document.querySelector('form[action="/upload_Monthly_file"]');
-        
-        if (studentFileForm) {
-            studentFileForm.addEventListener('submit', (e) => 
-                handleFileUpload(e, 'student_file', 'students', 'Upload Student File')
-            );
-        }
-        
-        if (weeklyFileForm) {
-            weeklyFileForm.addEventListener('submit', (e) => 
-                handleFileUpload(e, 'weekly_file', 'weekly', 'Upload Report File')
-            );
-        }
+    submitButton.disabled = true;
+    submitButton.textContent = 'Uploading...';
 
-        if (monthlyFileForm) {
-            monthlyFileForm.addEventListener('submit', (e) => 
-                handleFileUpload(e, 'monthly_file', 'monthly', 'Upload Report File')
-            );
+    try {
+        const file = fileInput.files[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+        const fileURL = await uploadReportToStorage(file, reportType, currentDate);
+
+        const reader = new FileReader();
+
+        reader.onload = async (e) => {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                // Process the data using the unified column mapping
+                const reports = processReportData(jsonData, reportType);
+
+                if (reports.length === 0) {
+                    throw new Error('No valid data found in the file');
+                }
+
+                const documentData = {
+                    reports: reports,
+                    date: currentDate,
+                    uploadedAt: new Date().toISOString(),
+                    uploadTimestamp: new Date(),
+                    totalReports: reports.length,
+                    fileURL: fileURL,
+                    fileName: file.name
+                };
+
+                // Save to Firestore with the correct collection name
+                await setDoc(doc(db, `${reportType}-reports`, currentDate), documentData);
+                
+                alert(`Successfully uploaded ${reports.length} ${reportType} reports`);
+                form.reset();
+                
+                if (typeof clearFilePreview === 'function') {
+                    clearFilePreview(fileInput.id);
+                }
+
+            } catch (error) {
+                alert(`Error processing file: ${error.message}`);
+                console.error('Error:', error);
+            }
+
+            submitButton.disabled = false;
+            submitButton.textContent = `Upload ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Report`;
+        };
+
+        reader.onerror = (error) => {
+            alert('Error reading file');
+            console.error('FileReader error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = `Upload ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Report`;
+        };
+
+        reader.readAsArrayBuffer(file);
+
+    } catch (error) {
+        alert(`Error uploading file: ${error.message}`);
+        console.error('Upload error:', error);
+        submitButton.disabled = false;
+        submitButton.textContent = `Upload ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Report`;
+    }
+}
+
+// Function to update file preview
+function updateFilePreview(input) {
+    const previewId = input.id + '_preview';
+    const previewDiv = document.getElementById(previewId);
+    
+    if (previewDiv) {
+        if (input.files && input.files[0]) {
+            const fileName = input.files[0].name;
+            previewDiv.innerHTML = `
+                <div class="file-info">
+                    <i class="file-icon fas fa-file-excel"></i>
+                    <span>${fileName}</span>
+                    <span class="clear-mark" onclick="clearFilePreview('${input.id}')">&times;</span>
+                </div>
+            `;
+            previewDiv.classList.add('active');
+        } else {
+            previewDiv.innerHTML = '';
+            previewDiv.classList.remove('active');
         }
+    }
+}
+
+// Function to clear file preview
+window.clearFilePreview = function(inputId) {
+    const input = document.getElementById(inputId);
+    const previewDiv = document.getElementById(inputId + '_preview');
+    
+    if (input && previewDiv) {
+        input.value = '';
+        previewDiv.innerHTML = '';
+        previewDiv.classList.remove('active');
+    }
+}
+
+// Set up event listeners when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Student form handler
+    const studentForm = document.getElementById('studentFileForm');
+    if (studentForm) {
+        studentForm.addEventListener('submit', handleFileUpload);
+    }
+
+    // Weekly report form handler
+    const weeklyForm = document.getElementById('weeklyFileForm');
+    if (weeklyForm) {
+        weeklyForm.addEventListener('submit', (e) => handleReportUpload(e, 'weekly'));
+    }
+
+    // Monthly report form handler
+    const monthlyForm = document.getElementById('monthlyFileForm');
+    if (monthlyForm) {
+        monthlyForm.addEventListener('submit', (e) => handleReportUpload(e, 'monthly'));
+    }
+
+    // Set up file previews for all file inputs
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(input => {
+        input.addEventListener('change', () => updateFilePreview(input));
     });
+})
+    
 </script>
-    <!-- 
 
-    JJJJJJJJJJJJ   JJJJJJJJJJ   
-          JJ      JJ
-          JJ       JJ
-          JJ        JJJJJJJJJ
-    J     JJ                JJ
-     JJ  JJ                JJ
-      JJJJ         JJJJJJJJJ 
--->
-    <!--------------------------------------------------------------------------------------------------------------->
 </body>
 </html>

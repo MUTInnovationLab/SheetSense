@@ -1,150 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports</title>
+    <title>Reports Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-
-<!--
-
-    Reports Page
-
-    This page displays all the reports submitted by students.
-    It has two sections: Submitted and Not Submitted.
-    The Submitted section displays all the students who have submitted their reports.
-    The Not Submitted section displays all the students who have not submitted their reports.
-
-    Each section has a card that displays the number of students and a table that shows the details of each student.
-
-    The details table has the following columns:
-    - Student Number
-    - Student Name
-    - Report Title
-    - Date Submitted (for Submitted section)
-    - Status (for Not Submitted section)
-
-    The page also has a button that redirects the user back to the dashboard.
-
--->
-<!--------------------------------------------------------------------------------------------------------------->
-<!-- 
-
-HH    HH    HHHHHHHHH    HH        HH    HH
-HH    HH       HH        HHHH     HHH    HH
-HH    HH       HH        HH HH  HH HH    HH
-HHHHHHHH       HH        HH   HH   HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HHHHHHHH
-
--->
-
-<body>
-    <div class="navbar">
-        <h1>Reports Page</h1>
-    </div>
-
-    <div class="content">
-        <h2>View All Reports</h2>
-
-        <!-- Submitted Reports Card -->
-        <div class="card" onclick="toggleDetails('submitted')">
-            <i class="fas fa-check-circle"></i>
-            <h3>Submitted Students</h3>
-            <p>Click to view all submitted students</p>
-        </div>
-
-        <!-- Not Submitted Reports Card -->
-        <div class="card" onclick="toggleDetails('not-submitted')">
-            <i class="fas fa-times-circle"></i>
-            <h3>Not Submitted Students</h3>
-            <p>Click to view students who have not submitted</p>
-        </div>
-
-        <!-- Submitted Students Details -->
-        <div id="submitted" class="details-container">
-            <h3>Submitted Students Details</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Student Number</th>
-                        <th>Student Name</th>
-                        <th>Report Title</th>
-                        <th>Date Submitted</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example Row: Submitted -->
-                    <tr>
-                        <td>123456</td>
-                        <td>John Doe</td>
-                        <td>Internship Report 1</td>
-                        <td>2025-01-10 14:30</td>
-                    </tr>
-                    <!-- Example Row: Submitted -->
-                    <tr>
-                        <td>112233</td>
-                        <td>Michael Johnson</td>
-                        <td>Internship Report 3</td>
-                        <td>2025-01-12 09:45</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Not Submitted Students Details -->
-        <div id="not-submitted" class="details-container">
-            <h3>Not Submitted Students Details</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Student Number</th>
-                        <th>Student Name</th>
-                        <th>Report Title</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example Row: Not Submitted -->
-                    <tr>
-                        <td>654321</td>
-                        <td>Jane Smith</td>
-                        <td>Internship Report 2</td>
-                        <td>Not Submitted</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <a href="/">Back to Dashboard</a>
-    </div>
-
-    <!-- 
-
-HH    HH    HHHHHHHHH    HH        HH    HH
-HH    HH       HH        HHHH     HHH    HH
-HH    HH       HH        HH HH  HH HH    HH
-HHHHHHHH       HH        HH   HH   HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HH
-HH    HH       HH        HH        HH    HHHHHHHH
-
--->
-    <!--------------------------------------------------------------------------------------------------------------->
-    <!-- 
-
-     CCCCCCCC     CCCCCCCC     CCCCCCCC
-    CC          CC           CC
-   CC            CC           CC
-  CC              CCCCCCCC     CCCCCCCC
-   CC                    CC           CC
-    CC                  CC           CC
-     CCCCCCCC    CCCCCCCC     CCCCCCCC  
--->
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -153,7 +13,6 @@ HH    HH       HH        HH        HH    HHHHHHHH
             padding: 0;
         }
 
-        /* Navbar Style */
         .navbar {
             background-color: #333;
             padding: 15px;
@@ -161,7 +20,6 @@ HH    HH       HH        HH        HH    HHHHHHHH
             text-align: center;
         }
 
-        /* Content Section */
         .content {
             padding: 30px;
             background-color: white;
@@ -170,14 +28,6 @@ HH    HH       HH        HH        HH    HHHHHHHH
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Title */
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        /* Card Styling */
         .card {
             background-color: #4CAF50;
             color: white;
@@ -196,20 +46,6 @@ HH    HH       HH        HH        HH    HHHHHHHH
             background-color: #388E3C;
         }
 
-        .card h3 {
-            margin-top: 10px;
-            color: white;
-        }
-
-        .card p {
-            color: #f0f0f0;
-        }
-
-        .card i {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
         .details-container {
             display: none;
             padding: 20px;
@@ -218,7 +54,18 @@ HH    HH       HH        HH        HH    HHHHHHHH
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Button */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
         a {
             display: inline-block;
             padding: 10px 20px;
@@ -228,61 +75,190 @@ HH    HH       HH        HH        HH    HHHHHHHH
             border-radius: 5px;
             text-align: center;
             transition: background-color 0.3s ease;
+            margin-top: 15px;
         }
 
         a:hover {
             background-color: #4CAF50;
         }
     </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Reports Page</h1>
+    </div>
 
-    <!-- 
+    <div class="content">
+        <div class="card" onclick="toggleDetails('submitted')">
+            <i class="fas fa-check-circle"></i>
+            <h3>Submitted Students</h3>
+            <p>Click to view all submitted students</p>
+        </div>
 
-     CCCCCCCC     CCCCCCCC     CCCCCCCC
-    CC          CC           CC
-   CC            CC           CC
-  CC              CCCCCCCC     CCCCCCCC
-   CC                    CC           CC
-    CC                  CC           CC
-     CCCCCCCC    CCCCCCCC     CCCCCCCC  
--->
-    <!--------------------------------------------------------------------------------------------------------------->
-    <!-- 
+        <div class="card" onclick="toggleDetails('not-submitted')">
+            <i class="fas fa-times-circle"></i>
+            <h3>Not Submitted Students</h3>
+            <p>Click to view students who have not submitted</p>
+        </div>
 
-    JJJJJJJJJJJJ   JJJJJJJJJJ   
-          JJ      JJ
-          JJ       JJ
-          JJ        JJJJJJJJJ
-    J     JJ                JJ
-     JJ  JJ                JJ
-      JJJJ         JJJJJJJJJ 
--->
+        <div id="submitted" class="details-container">
+            <h3>Submitted Students Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Report Type</th>
+                        <th>Date Submitted</th>
+                    </tr>
+                </thead>
+                <tbody id="submitted-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
 
+        <div id="not-submitted" class="details-container">
+            <h3>Not Submitted Students Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Report Title</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="not-submitted-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
 
+        <a href="/">Back to Dashboard</a>
+    </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvLwOd23fTx6RpAuodsyFZwntry6AV9Ik",
+            authDomain: "cvsystem-253f9.firebaseapp.com",
+            projectId: "cvsystem-253f9",
+            storageBucket: "cvsystem-253f9.appspot.com",
+            messagingSenderId: "133527156661",
+            appId: "1:133527156661:web:8d8794eeae33b16dabcbfc"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchStudentsData() {
+            const studentsRef = collection(db, 'students');
+            const studentsSnapshot = await getDocs(studentsRef);
+            return studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+
+        async function fetchWeeklyReports() {
+            const weeklyRef = collection(db, 'weekly');
+            const weeklySnapshot = await getDocs(weeklyRef);
+            return weeklySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+
+        async function fetchMonthlyReports() {
+            const monthlyRef = collection(db, 'monthly');
+            const monthlySnapshot = await getDocs(monthlyRef);
+            return monthlySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+
+        async function findSubmittedStudents() {
+            try {
+                const studentsData = await fetchStudentsData();
+                const weeklyReports = await fetchWeeklyReports();
+                const monthlyReports = await fetchMonthlyReports();
+
+                const submittedEmails = new Set([
+                    ...weeklyReports.flatMap(report => report.files?.map(f => f.email) || []),
+                    ...monthlyReports.flatMap(report => report.files?.map(f => f.email) || [])
+                ]);
+
+                const submittedStudents = studentsData.filter(student => 
+                    submittedEmails.has(student.email)
+                );
+
+                const submittedTableBody = document.getElementById('submitted-body');
+                submittedTableBody.innerHTML = '';
+
+                submittedStudents.forEach(student => {
+                    const isWeeklyReport = weeklyReports.some(report => 
+                        report.files?.some(f => f.email === student.email)
+                    );
+                    const row = `
+                        <tr>
+                            <td>${student.studentNumber}</td>
+                            <td>${student.name}</td>
+                            <td>${isWeeklyReport ? 'Weekly Report' : 'Monthly Report'}</td>
+                            <td>${new Date().toISOString().split('T')[0]}</td>
+                        </tr>
+                    `;
+                    submittedTableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error finding submitted students:', error);
+                alert('Error fetching submitted students: ' + error.message);
+            }
+        }
+
+        async function findNotSubmittedStudents() {
+            try {
+                const studentsData = await fetchStudentsData();
+                const weeklyReports = await fetchWeeklyReports();
+                const monthlyReports = await fetchMonthlyReports();
+
+                const submissionEmails = new Set([
+                    ...weeklyReports.flatMap(report => report.files?.map(f => f.email) || []),
+                    ...monthlyReports.flatMap(report => report.files?.map(f => f.email) || [])
+                ]);
+
+                const notSubmittedStudents = studentsData.filter(student => 
+                    !submissionEmails.has(student.email)
+                );
+
+                const notSubmittedTableBody = document.getElementById('not-submitted-body');
+                notSubmittedTableBody.innerHTML = '';
+
+                notSubmittedStudents.forEach(student => {
+                    const row = `
+                        <tr>
+                            <td>${student.studentNumber}</td>
+                            <td>${student.name}</td>
+                            <td>Missing Report</td>
+                            <td>Not Submitted</td>
+                        </tr>
+                    `;
+                    notSubmittedTableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error finding not submitted students:', error);
+                alert('Error fetching not submitted students: ' + error.message);
+            }
+        }
+
         function toggleDetails(section) {
-            // Hide both details sections first
             document.getElementById('submitted').style.display = 'none';
             document.getElementById('not-submitted').style.display = 'none';
 
-            // Show the clicked section
             document.getElementById(section).style.display = 'block';
+
+            if (section === 'submitted') {
+                findSubmittedStudents();
+            } else if (section === 'not-submitted') {
+                findNotSubmittedStudents();
+            }
         }
+
+        window.toggleDetails = toggleDetails;
     </script>
-
-    <!-- 
-
-    JJJJJJJJJJJJ   JJJJJJJJJJ   
-          JJ      JJ
-          JJ       JJ
-          JJ        JJJJJJJJJ
-    J     JJ                JJ
-     JJ  JJ                JJ
-      JJJJ         JJJJJJJJJ 
--->
-    <!--------------------------------------------------------------------------------------------------------------->
-
 </body>
-
 </html>
