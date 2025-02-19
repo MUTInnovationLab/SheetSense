@@ -1,18 +1,16 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request, jsonify
 import os
-import pandas as pd
-from firebase_admin import credentials, firestore, storage, initialize_app
+from firebase_admin import credentials, firestore, initialize_app
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Initialize Firebase.
-cred = credentials.Certificate("config/serviceAccountKey.json") 
-initialize_app(cred) 
+# Initialize Firebase
+cred = credentials.Certificate("config/serviceAccountKey.json")
+initialize_app(cred)
 db = firestore.client()
- 
- 
-# Fetch data from Firestore 
+
+# Fetch data from Firestore
 def fetch_data(collection):
     try:
         docs = db.collection(collection).stream()
@@ -23,16 +21,15 @@ def fetch_data(collection):
         print(f"Error fetching data from {collection}: {e}")
         return []
 
-
-# Process data 
+# Process data
 def process_data():
     student_list = fetch_data('students')
     weekly_reports = fetch_data('weekly')
     monthly_reports = fetch_data('monthly')
 
-    print(f"Student List: {student_list}") # Debugging statement
-    print(f"Weekly Reports: {weekly_reports}") # Debugging statement
-    print(f"Monthly Reports: {monthly_reports}") # Debugging statement
+    print(f"Student List: {student_list}")  # Debugging statement
+    print(f"Weekly Reports: {weekly_reports}")  # Debugging statement
+    print(f"Monthly Reports: {monthly_reports}")  # Debugging statement
 
     submitted = []
     not_submitted = []
@@ -43,11 +40,11 @@ def process_data():
             student_number = student.get('student number', 'Unknown')
             firstname = student.get('firstname', 'Unknown')
             lastname = student.get('lastname', 'Unknown')
-            
+
             if student_number != 'Unknown':
                 weekly_submitted = next((report for report in weekly_reports if report.get('student number') == student_number), None)
                 monthly_submitted = next((report for report in monthly_reports if report.get('student number') == student_number), None)
-                
+
                 if weekly_submitted and monthly_submitted:
                     submitted.append({
                         'student_number': student_number,
@@ -67,19 +64,18 @@ def process_data():
         except Exception as e:
             print(f"Error processing student: {e}")
 
-    print(f"Submitted students: {submitted}") # Debugging statement
-    print(f"Not submitted students: {not_submitted}") # Debugging statement
-    
-    return submitted, not_submitted
+    print(f"Submitted students: {submitted}")  # Debugging statement
+    print(f"Not submitted students: {not_submitted}")  # Debugging statement
 
+    return submitted, not_submitted
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/view_reports') 
-def view_reports(): 
-    submitted, not_submitted = process_data() 
+@app.route('/view_reports')
+def view_reports():
+    submitted, not_submitted = process_data()
     return render_template('Reports.html', submitted=submitted, not_submitted=not_submitted)
 
 @app.route('/view_history')
@@ -90,5 +86,9 @@ def view_history():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/manage_files')
+def manage_files():
+    # Placeholder for file management logic
+    return render_template('files.html')
 if __name__ == "__main__":
     app.run(debug=True)
