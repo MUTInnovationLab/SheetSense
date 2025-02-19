@@ -5,6 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<<<<<<< HEAD
+=======
+</head>
+
+<!--
+
+    Reports Page
+
+    This page displays all the reports submitted by students.
+    It has two sections: Submitted and Not Submitted.
+    The Submitted section displays all the students who have submitted their reports.
+    The Not Submitted section displays all the students who have not submitted their reports.
+
+    Each section has a card that displays the number of students and a table that shows the details of each student.
+
+    The details table has the following columns:
+    - Student Number
+    - Student Name
+    - Report Title
+    - Date Submitted (for Submitted section)
+    - Status (for Not Submitted section)
+
+    The page also has a button that redirects the user back to the dashboard.
+
+-->
+<!--------------------------------------------------------------------------------------------------------------->
+<!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+
+<body>
+    <div class="navbar">
+        <h1>Reports Page</h1>
+    </div>
+
+    <div class="content">
+        <h2>View All Reports</h2>
+
+        <!-- Debugging: Display submitted students --> 
+         <h3>Submitted Students (Debugging Info)</h3> 
+         <pre>{{ submitted }}</pre>
+
+        <!-- Debugging: Display not submitted students --> 
+        <h3>Not Submitted Students (Debugging Info)</h3> 
+        <pre>{{ not_submitted }}</pre>
+
+        <!-- Submitted Reports Card -->
+        <div class="card" onclick="toggleDetails('submitted')">
+            <i class="fas fa-check-circle"></i>
+            <h3>Submitted Students</h3>
+            <p>Click to view all submitted students</p>
+        </div>
+
+        <!-- Not Submitted Reports Card -->-
+        <div class="card" onclick="toggleDetails('not-submitted')">
+            <i class="fas fa-times-circle"></i>
+            <h3>Not Submitted Students</h3>
+            <p>Click to view students who have not submitted</p>
+        </div>
+
+        <!-- Submitted Students Details -->
+        <div id="submitted" class="details-container">
+            <h3>Submitted Students Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Report Title</th>
+                        <th>Date Submitted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Row: Submitted -->
+                    {% for student in submitted %}
+                    <tr>
+                        <td>{{ student.student_number }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.report_title }}</td>
+                        <td>{{ student.date_submitted }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Not Submitted Students Details -->
+        <div id="not-submitted" class="details-container">
+            <h3>Not Submitted Students Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Report Title</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Row: Not Submitted -->
+                    {% for student in not_submitted %}
+                    <tr>
+                        <td>{{ student.student_number }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.report_title }}</td>
+                        <td>{{ student.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/">Back to Dashboard</a>
+    </div>
+
+    <!-- 
+
+HH    HH    HHHHHHHHH    HH        HH    HH
+HH    HH       HH        HHHH     HHH    HH
+HH    HH       HH        HH HH  HH HH    HH
+HHHHHHHH       HH        HH   HH   HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HH
+HH    HH       HH        HH        HH    HHHHHHHH
+
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- 
+
+     CCCCCCCC     CCCCCCCC     CCCCCCCC
+    CC          CC           CC
+   CC            CC           CC
+  CC              CCCCCCCC     CCCCCCCC
+   CC                    CC           CC
+    CC                  CC           CC
+     CCCCCCCC    CCCCCCCC     CCCCCCCC  
+-->
+
+>>>>>>> 874f02b58a9784e34ca0c1ae60d6a2711fd773d0
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -260,5 +407,21 @@
 
         window.toggleDetails = toggleDetails;
     </script>
+<<<<<<< HEAD
+=======
+
+    <!-- 
+
+    JJJJJJJJJJJJ   JJJJJJJJJJ   
+          JJ      JJ
+          JJ       JJ
+          JJ        JJJJJJJJJ
+    J     JJ                JJ
+     JJ  JJ                JJ
+      JJJJ                                              0.JJJJJJJJJ 
+-->
+    <!--------------------------------------------------------------------------------------------------------------->
+
+>>>>>>> 874f02b58a9784e34ca0c1ae60d6a2711fd773d0
 </body>
 </html>
